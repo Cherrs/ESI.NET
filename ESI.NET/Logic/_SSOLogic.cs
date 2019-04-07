@@ -27,8 +27,8 @@ namespace ESI.NET
             clientKey = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{config.ClientId}:{config.SecretKey}"));
         }
 
-        public string CreateAuthenticationUrl(List<string> scopes = null)
-            => $"https://login.eveonline.com/oauth/authorize/?response_type=code&redirect_uri={Uri.EscapeDataString(_config.CallbackUrl)}&client_id={_config.ClientId}{((scopes != null) ? $"&scope={string.Join(" ", scopes)}" : "")}";
+        public string CreateAuthenticationUrl(string state,List<string> scopes = null)
+            => $"https://login.eveonline.com/oauth/authorize/?response_type=code&redirect_uri={Uri.EscapeDataString(_config.CallbackUrl)}&client_id={_config.ClientId}{((scopes != null) ? $"&scope={string.Join(" ", scopes)}" : "")}&state={state}";
 
         /// <summary>
         /// SSO Token helper
